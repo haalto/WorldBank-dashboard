@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react'
+import Datatable from './components/Datatable/Datatable'
+import { getCountries } from './services/countryServices'
 
-function App() {
+const App: React.FC = () => {
+
+  const headers = ['Name', 'ICO2', 'Capital', 'Region', 'Subregion', 'Population', 'Gini']
+  const [countryData, setCountryData] = useState([])
+  
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getCountries()
+      setCountryData(data)
+      console.log(data)
+    } 
+    getData()
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Datatable
+        headers={headers}
+        data={countryData}
+      />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
