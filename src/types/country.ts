@@ -1,4 +1,4 @@
-export default interface Country {
+export default interface CountryInterface {
   name: string
   alpha2Code: string
   capital: string
