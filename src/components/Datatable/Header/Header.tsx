@@ -6,7 +6,7 @@ interface Props {
 
 const Header: React.FC<Props> = ({ headers }) => {
 
-const renderHeaders = () => headers.map(h => <th key={h}>{h}</th>)
+const renderHeaders = () => headers.map(header => <th key={header}>{header}</th>)
 
   return (
     <tr>

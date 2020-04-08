@@ -4,24 +4,23 @@ import { getCountries } from './services/countryServices'
 
 const App: React.FC = () => {
 
-  const headers = ['Name', 'ICO2', 'Capital', 'Region', 'Subregion', 'Population', 'Gini']
+  const headers = ['Name', 'ICO2', 'Capital', 'Region', 'Subregion', 'Population', 'Area','Gini']
   const [countryData, setCountryData] = useState([])
-  
+  const [loading, setLoading] = useState(false)  
+
   useEffect(() => {
     const getData = async () => {
+      setLoading(true)
       const data = await getCountries()
       setCountryData(data)
-      console.log(data)
+      setLoading(false)
     } 
     getData()
   }, [])
 
   return (
     <div>
-      <Datatable
-        headers={headers}
-        data={countryData}
-      />
+      {loading ? 'Loading country data' : <Datatable headers={headers} data={countryData}/>}      
     </div>
   )
 }
