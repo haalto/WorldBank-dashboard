@@ -29,7 +29,7 @@ const Table: React.FC = () => {
   )
 
   const [data, setData] = useState([])
-  const [loading, setLoading] = useState(false)  
+  const [loading, setLoading] = useState(true)  
 
   const {
     getTableProps,
@@ -54,37 +54,40 @@ const Table: React.FC = () => {
   }, [])
 
   return (
-    <StyledTable >
+    <StyledTable>
       {
-        loading ? <div id='loading-icon'>Loading data</div> :
-        <table {...getTableProps()}>
-          <thead>
-            {headerGroups.map(headerGroup => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map(column => (
-                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                    {column.render('Header')}             
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {rows.map(row => {
-              prepareRow(row)
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map(cell => {
-                    return (
-                      <td {...cell.getCellProps()}>
-                        {cell.render('Cell')}                                  
-                      </td>)
-                  })}
+        loading 
+        ? 
+          <div id='loading-icon'>Loading data</div> 
+        :
+          <table {...getTableProps()}>
+            <thead>
+              {headerGroups.map(headerGroup => (
+                <tr {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map(column => (
+                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                      {column.render('Header')}             
+                    </th>
+                  ))}
                 </tr>
-              )
-            })}
-          </tbody>
-        </table>
+              ))}
+            </thead>
+            <tbody {...getTableBodyProps()}>
+              {rows.map(row => {
+                prepareRow(row)
+                return (
+                  <tr {...row.getRowProps()}>
+                    {row.cells.map(cell => {
+                      return (
+                        <td {...cell.getCellProps()}>
+                          {cell.render('Cell')}                                  
+                        </td>)
+                    })}
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
       } 
     </StyledTable>
   )
@@ -100,32 +103,32 @@ const StyledTable = styled.div`
   width: 90%;
   min-height: 100vh;
 
-    table {
-      border-spacing: 0;
-      text-align: center;
-      margin: auto;
-      width: 100%;
-      font-size: 1.5em;
-    }
+  table {
+    border-spacing: 0;
+    text-align: center;
+    margin: auto;
+    width: 100%;
+    font-size: 1.5em;
+  }
 
-    th {
-      padding: 1vh;
-    }
-    
-    tr td {
-      padding: 1vh;
-    }
+  th {
+    padding: 1vh;
+  }
+  
+  tr td {
+    padding: 1vh;
+  }
 
-    tbody tr:nth-child(odd) {
-      background-color: rgb(173,216,230);
-    }
+  tbody tr:nth-child(odd) {
+    background-color: rgb(173,216,230);
+  }
 
-    #loading-icon {
-      color: red;
-      font-size: 2em;
-      margin: 0 auto;
-      text-align: center;
-    }
+  #loading-icon {
+    color: red;
+    font-size: 2em;
+    margin: 0 auto;
+    text-align: center;
+  }
 ` 
 
 export default Table
