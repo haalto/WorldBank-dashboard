@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react'
 import { useTable , useSortBy } from 'react-table'
 import { CellProps } from 'react-table'
 import { getCountries } from '../../services/countryServices'
+import styled from 'styled-components'
 
 const Table: React.FC = () => {
 
@@ -47,7 +48,7 @@ const Table: React.FC = () => {
       const data = await getCountries()
       setData(data)
       setLoading(false)
-      console.log(data)
+      //console.log(data)
     } 
     getData()
   }, [])
@@ -57,7 +58,7 @@ const Table: React.FC = () => {
   }
 
   return (
-    <table {...getTableProps()}>
+    <StyledTable {...getTableProps()}>
       <thead>
         {headerGroups.map(headerGroup => (
           <tr {...headerGroup.getHeaderGroupProps()}>
@@ -84,8 +85,29 @@ const Table: React.FC = () => {
           )
         })}
       </tbody>
-    </table>
+    </StyledTable>
   )
 }
+
+const StyledTable = styled.table`
+  width: 70%;
+  margin: 5vh;
+  border: solid 1px black;
+  border-spacing: 0;
+
+  th {
+    margin: 20px;
+    padding: 1vh;
+    border-bottom: solid 1px black;
+  }
+  
+  tr td {
+    padding: 1vh;
+  }
+
+  tbody tr:nth-child(odd) {
+    background-color: rgb(173,216,230);
+  }
+` 
 
 export default Table
