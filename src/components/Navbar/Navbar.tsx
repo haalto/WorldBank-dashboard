@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
 const StyledNav = styled.nav`
   display: flex;
   flex-direction: row;
-  font-size: 2em;
+  font-size: 1.5em;
   position: fixed;
   overflow: hidden;
   width: 100%;

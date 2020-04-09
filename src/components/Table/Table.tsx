@@ -107,7 +107,7 @@ const StyledTable = styled.div`
     text-align: center;
     margin: auto;
     width: 100%;
-    font-size: 1.5em;
+    font-size: 1em;
   }
 
   th {
