@@ -1,5 +1,4 @@
 import React from 'react'
-import Table from './components/Table/Table'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import LandingPage from './pages/LandingPage/LandingPage'
 import TablePage from './pages/TablePage/TablePage'

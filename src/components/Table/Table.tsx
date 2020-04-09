@@ -96,11 +96,10 @@ const Table: React.FC = () => {
 const StyledTable = styled.div`
   
   margin: auto;
-  margin-top: 5vh;
   margin-bottom: 5vh;
-  padding-top: 2vh;
+  padding-top: 10vh;
   align: center;
-  width: 90%;
+  width: 95%;
   min-height: 100vh;
 
   table {
@@ -124,7 +123,6 @@ const StyledTable = styled.div`
   }
 
   #loading-icon {
-    color: red;
     font-size: 2em;
     margin: 0 auto;
     text-align: center;

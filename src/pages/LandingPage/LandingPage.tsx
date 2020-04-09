@@ -4,8 +4,7 @@ import Navbar from '../../components/Navbar/Navbar'
 const LandingPage: React.FC = () => {
   return(
     <div>
-      <Navbar/>
-      Landing
+      <Navbar/>      
     </div>
   )
 }
