@@ -1,14 +1,34 @@
-import React from 'react'
-import HeaderInterface from '../../types/header'
-import CountryInterface from '../../types/country'
+import React, { useEffect, useState, useMemo } from 'react'
 import { useTable , useSortBy } from 'react-table'
+import { CellProps } from 'react-table'
+import { getCountries } from '../../services/countryServices'
 
-interface Props {
-  columns: HeaderInterface[]
-  data: CountryInterface[]
-}
+const Table: React.FC = () => {
 
-const Table: React.FC<Props> = ({ columns, data }) => {
+  const columns = useMemo(
+    () => [
+      { 
+        Header: 'Name', 
+        accessor: 'name', 
+        Cell: (
+          { cell: { value } }: CellProps<object> ) => 
+            <span onClick={()=>console.log('clicked')}>
+              {value}
+            </span> 
+      },
+      { Header: 'ICO2', accessor: 'alpha2Code' },
+      { Header: 'Capital', accessor: 'capital' },
+      { Header: 'Region', accessor: 'region' },
+      { Header: 'Subregion', accessor: 'subregion' },
+      { Header: 'Population', accessor: 'population' },
+      { Header: 'Area', accessor: 'area' },
+      { Header: 'Gini', accessor: 'gini' },
+    ],
+    []
+  )
+
+  const [data, setData] = useState([])
+  const [loading, setLoading] = useState(false)  
 
   const {
     getTableProps,
@@ -20,6 +40,21 @@ const Table: React.FC<Props> = ({ columns, data }) => {
     { columns, data },
     useSortBy
   )
+
+  useEffect(() => {
+    const getData = async () => {
+      setLoading(true)
+      const data = await getCountries()
+      setData(data)
+      setLoading(false)
+      console.log(data)
+    } 
+    getData()
+  }, [])
+
+  if (loading) {
+    return <div>Loading data</div>
+  }
 
   return (
     <table {...getTableProps()}>
