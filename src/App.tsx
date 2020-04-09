@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from 'react'
-import Datatable from './components/Datatable/Datatable'
+import React, { useEffect, useState, useMemo } from 'react'
 import { getCountries } from './services/countryServices'
-
+import Table from './components/Table/Table'
 const App: React.FC = () => {
 
-  const headers = [
-    {name: 'Name',  field: 'name'}, 
-    {name: 'ICO2',  field: 'alpha2code'},
-    {name: 'Capital',  field: 'capital'},
-    {name: 'Region',  field: 'region'},
-    {name: 'Subregion',  field: 'subregion'},
-    {name: 'Population',  field: 'population'},
-    {name: 'Area',  field: 'area'},
-    {name: 'Gini',  field: 'gini'}
-  ]
+  const columns = useMemo(
+    () => [
+      { Header: 'Name', accessor: 'name' },
+      { Header: 'ICO2', accessor: 'alpha2Code' },
+      { Header: 'Capital', accessor: 'capital' },
+      { Header: 'Region', accessor: 'region' },
+      { Header: 'Subregion', accessor: 'subregion' },
+      { Header: 'Population', accessor: 'population' },
+      { Header: 'Area', accessor: 'area' },
+      { Header: 'Gini', accessor: 'gini' },
+    ],
+    []
+  )
 
   const [countryData, setCountryData] = useState([])
   const [loading, setLoading] = useState(false)  
@@ -24,13 +26,14 @@ const App: React.FC = () => {
       const data = await getCountries()
       setCountryData(data)
       setLoading(false)
+      console.log(data)
     } 
     getData()
   }, [])
 
   return (
-    <div>
-      {loading ? 'Loading country data' : <Datatable headers={headers} data={countryData}/>}      
+    <div>            
+      {loading ? 'Loading country data' : <Table columns={columns} data={countryData}/>}
     </div>
   )
 }
