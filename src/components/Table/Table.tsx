@@ -53,61 +53,79 @@ const Table: React.FC = () => {
     getData()
   }, [])
 
-  if (loading) {
-    return <div>Loading data</div>
-  }
-
   return (
-    <StyledTable {...getTableProps()}>
-      <thead>
-        {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                {column.render('Header')}             
-              </th>
+    <StyledTable >
+      {
+        loading ? <div id='loading-icon'>Loading data</div> :
+        <table {...getTableProps()}>
+          <thead>
+            {headerGroups.map(headerGroup => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map(column => (
+                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                    {column.render('Header')}             
+                  </th>
+                ))}
+              </tr>
             ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map(row => {
-          prepareRow(row)
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map(cell => {
-                return (
-                  <td {...cell.getCellProps()}>
-                    {cell.render('Cell')}                                  
-                  </td>)
-              })}
-            </tr>
-          )
-        })}
-      </tbody>
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {rows.map(row => {
+              prepareRow(row)
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map(cell => {
+                    return (
+                      <td {...cell.getCellProps()}>
+                        {cell.render('Cell')}                                  
+                      </td>)
+                  })}
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      } 
     </StyledTable>
   )
 }
 
-const StyledTable = styled.table`
-  width: 70%;
-  margin: 5vh;
-  border: solid 1px black;
-  border-spacing: 0;
-
-  th {
-    margin: 20px;
-    padding: 1vh;
-    border-bottom: solid 1px black;
-  }
+const StyledTable = styled.div`
   
-  tr td {
-    padding: 1vh;
-  }
+  margin: auto;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  padding-top: 2vh;
+  align: center;
+  width: 90%;
+  min-height: 100vh;
 
-  tbody tr:nth-child(odd) {
-    background-color: rgb(173,216,230);
-  }
+    table {
+      border-spacing: 0;
+      text-align: center;
+      margin: auto;
+      width: 100%;
+      font-size: 1.5em;
+    }
+
+    th {
+      padding: 1vh;
+    }
+    
+    tr td {
+      padding: 1vh;
+    }
+
+    tbody tr:nth-child(odd) {
+      background-color: rgb(173,216,230);
+    }
+
+    #loading-icon {
+      color: red;
+      font-size: 2em;
+      margin: 0 auto;
+      text-align: center;
+    }
 ` 
 
 export default Table
