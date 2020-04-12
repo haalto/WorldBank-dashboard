@@ -21,12 +21,13 @@ const ChartPage: React.FC = () => {
       <Tooltip/>
     </LineChart>
   ) 
-
-  const reduceValueSize = (data: IDataObject[]) => {
+  
+  //Probably not the best way to do this. I will try to figure out a functional way to do it.
+  const reduceValueSizeToBillions = (data: IDataObject[]) => {
     const reducedData: IDataObject[] = []
     for (let item of data) {
       if (item.value !== 0) {
-        item.value = item.value/1000000000        
+        item.value = parseFloat((item.value/1000000000).toFixed(1))      
       }
       reducedData.push(item)
     }
@@ -39,7 +40,7 @@ const ChartPage: React.FC = () => {
       const filteredData = responseData.filter((_, i) => i % 2 === 1)
       const mergedData = filteredData.concat.apply([], [...filteredData]).reverse()
       mergedData.pop()
-      const reducedData = reduceValueSize(mergedData)
+      const reducedData = reduceValueSizeToBillions(mergedData)
       setData(reducedData)
     }
     catch (e) {
@@ -60,7 +61,6 @@ const ChartPage: React.FC = () => {
 }
 
 const MainWrapper = styled.div`
-  padding: 10vw;
+  padding: 5vw;
 `
-
 export default ChartPage
