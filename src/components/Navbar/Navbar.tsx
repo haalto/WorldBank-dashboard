@@ -9,6 +9,7 @@ const Navbar: React.FC = () => {
     <StyledNav>
       <StyledLink onClick={()=>history.push('/')}>Home</StyledLink>
       <StyledLink onClick={()=>history.push('/countries')}>Countries</StyledLink>
+      <StyledLink onClick={()=>history.push('/charts')}>Charts</StyledLink>
     </StyledNav>
   )
 }
